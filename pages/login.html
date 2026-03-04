@@ -1,0 +1,95 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion - TaskFlow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+  <main class="auth-page">
+    <section class="auth-info">
+      <a class="logo" href="../index.html"><span>TF</span>TaskFlow</a>
+      <h1>Connexion</h1>
+      <p>Retrouve ton tableau et tes objectifs.</p>
+    </section>
+
+    <section class="auth-card">
+      <a class="retour" href="../index.html">Retour a l'accueil</a>
+
+      <div id="msgErreur" class="alerte erreur" style="display:none"></div>
+      <div id="msgSucces" class="alerte succes" style="display:none"></div>
+
+      <form id="formLogin" novalidate>
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="nom@exemple.com">
+        <small id="erreurEmail" class="err"></small>
+
+        <label for="motdepasse">Mot de passe</label>
+        <div class="ligne">
+          <input id="motdepasse" type="password" placeholder="Votre mot de passe">
+          <button id="voirMdp" type="button">voir</button>
+        </div>
+        <small id="erreurMdp" class="err"></small>
+
+        <button class="btn" type="submit">Se connecter</button>
+      </form>
+
+      <p class="switch">Pas encore de compte ? <a href="register.html">Inscription</a></p>
+    </section>
+  </main>
+
+  <script src="../js/auth.js"></script>
+  <script>
+    var champMdp = document.getElementById('motdepasse');
+    var boutonVoir = document.getElementById('voirMdp');
+
+    boutonVoir.addEventListener('click', function () {
+      var visible = champMdp.type === 'password';
+      champMdp.type = visible ? 'text' : 'password';
+      boutonVoir.textContent = visible ? 'masquer' : 'voir';
+    });
+
+    document.getElementById('formLogin').addEventListener('submit', function (e) {
+      e.preventDefault();
+      nettoyerMessages();
+
+      var email = lireValeur('email').trim();
+      var motdepasse = lireValeur('motdepasse');
+      var valide = true;
+
+      if (!email.includes('@')) {
+        afficherErreur('erreurEmail', 'Email invalide');
+        valide = false;
+      }
+
+      if (motdepasse.length < 4) {
+        afficherErreur('erreurMdp', '4 caracteres minimum');
+        valide = false;
+      }
+
+      if (!valide) return;
+
+      var users = lireUsers();
+      var user = users.find(function (u) {
+        return u.email === email && u.motdepasse === motdepasse;
+      });
+
+      if (!user) {
+        afficherMessage('msgErreur', 'Email ou mot de passe incorrect');
+        return;
+      }
+
+      definirSession({ id: user.id, nom: user.nom, email: user.email });
+      afficherMessage('msgSucces', 'Connexion reussie, redirection...');
+
+      setTimeout(function () {
+        window.location.href = 'dashboard.html';
+      }, 700);
+    });
+  </script>
+</body>
+</html>

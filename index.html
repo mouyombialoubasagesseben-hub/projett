@@ -1,0 +1,122 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow - Gestion de projet etudiant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"> 
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="nav" id="nav">
+    <a class="logo" href="index.html">
+      <span class="logo-badge">TF</span>
+      <span>TaskFlow</span>
+    </a>
+
+    <button class="menu-btn" id="menuBtn" aria-label="Ouvrir le menu">Menu</button>
+
+    <ul class="menu" id="menu">
+      <li><a href="#fonctions">Fonctionnalites</a></li>
+      <li><a href="#processus">Demarrage</a></li>
+      <li><a href="pages/login.html">Connexion</a></li>
+      <li><a class="btn-principal" href="pages/register.html">Inscription</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-texte">
+      <p class="hero-tag">Organise-toi </p>
+      <h1>Pilote tes projets avec un kanban simple et rapide.</h1>
+      <p>
+        
+        Cree des tableaux, ajoute des taches, deplace-les entre colonnes et suis tes deadlines.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-principal" href="pages/register.html">Creer mon compte</a>
+        <a class="btn-lien" href="pages/login.html">J'ai deja un compte</a>
+      </div>
+    </div>
+
+    <div class="hero-board" aria-hidden="true">
+      <div class="hero-board-head">Fitness à fond !</div>
+      <div class="hero-board-cols">
+        <article>
+          <h3>A faire</h3>
+          <p>40 pompes/jour</p>
+          <p>40 squats/jour</p>
+        </article>
+        <article>
+          <h3>En cours</h3>
+          <p>jogging</p>
+        </article>
+        <article>
+          <h3>Termine</h3>
+          <p>40/abdos</p>
+        </article>
+      </div>
+    </div>
+  </header>
+
+  <section class="stats">
+    <article>
+      <strong>1</strong>
+      <span>objectif</span>
+    </article>
+    <article>
+      <strong>2</strong>
+      <span>planification</span>
+    </article>
+    <article>
+      <strong>3</strong>
+      <span>passer à l'action</span>
+    </article>
+  </section>
+
+  <section class="bloc" id="fonctions">
+    <h2>Fonctionnalites principales</h2>
+    <div class="grille">
+      <article>
+        <h3>Tableaux multiples</h3>
+        <p>Un tableau par matiere: web, reseau, base de donnees, projet tuteuré.</p>
+      </article>
+      <article>
+        <h3>Priorites et dates</h3>
+        <p>Chaque tache peut avoir une priorite et une echeance pour mieux planifier.</p>
+      </article>
+      <article>
+        <h3>Organisation</h3>
+        <p>Deplace les cartes entre colonnes pour visualiser l'avancement en temps reel.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="bloc bloc-clair" id="processus">
+    <h2>Demarrage rapide</h2>
+    <ol>
+      <li>Inscription avec nom, email et mot de passe.</li>
+      <li>Creation d'un tableau de travail.</li>
+      <li>Ajout des taches et suivi quotidien.</li>
+    </ol>
+  </section>
+
+  <footer class="footer">
+  <p>© 2026 Taskflow. Tous droits réservés.</p>
+</footer>
+
+  <script>
+    var nav = document.getElementById('nav'); 
+    var menu = document.getElementById('menu');
+
+    document.getElementById('menuBtn').addEventListener('click', function () {
+      menu.classList.toggle('ouvert');
+    });
+
+    window.addEventListener('scroll', function () {
+      nav.classList.toggle('nav-fixe', window.scrollY > 8);
+    });
+  </script>
+</body>
+</html>

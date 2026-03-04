@@ -1,0 +1,107 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - TaskFlow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <a class="logo" href="../index.html"><span>TF</span>TaskFlow</a>
+      <button class="btn-mini" id="btnFermerMenu">x</button>
+    </div>
+
+    <div class="user-box">
+      <div class="user-avatar" id="avatarUser">?</div>
+      <div>
+        <b id="nomUser"></b>
+        <small id="emailUser"></small>
+      </div>
+    </div>
+
+    <h4>Mes tableaux</h4>
+    <div id="listeTableaux"></div>
+
+    <button class="btn-sec" id="btnNouveauTableau">+ Nouveau tableau</button>
+    <a class="lien" href="profile.html">Mon profil</a>
+    <button class="lien lien-danger" id="btnDeconnexion">Deconnexion</button>
+  </aside>
+
+  <header class="topbar">
+    <button class="btn-mini" id="btnMenu">menu</button>
+    <h1 id="titreTableau">Tableau</h1>
+    <div class="topbar-right">
+      <input id="recherche" type="search" placeholder="Rechercher une tache">
+      <button class="btn-main" id="btnNouvelleColonne">+ Colonne</button>
+    </div>
+  </header>
+
+  <main class="board-zone" id="zoneBoard"></main>
+
+  <div class="modal-backdrop" id="modalTableau">
+    <form class="modal" id="formTableau" novalidate>
+      <h3>Nouveau tableau</h3>
+      <input id="nomTableau" placeholder="Ex: Projet reseau">
+      <small class="err" id="erreurNomTableau"></small>
+      <div class="modal-actions">
+        <button type="button" data-close="modalTableau">Annuler</button>
+        <button type="submit">Creer</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-backdrop" id="modalColonne">
+    <form class="modal" id="formColonne" novalidate>
+      <h3>Nouvelle colonne</h3>
+      <input id="nomColonne" placeholder="Ex: Tests">
+      <small class="err" id="erreurNomColonne"></small>
+      <div class="modal-actions">
+        <button type="button" data-close="modalColonne">Annuler</button>
+        <button type="submit">Creer</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-backdrop" id="modalCarte">
+    <form class="modal" id="formCarte" novalidate>
+      <h3 id="titreModalCarte">Nouvelle tache</h3>
+      <input type="hidden" id="carteId">
+      <input type="hidden" id="colonneId">
+
+      <label for="titreCarte">Titre</label>
+      <input id="titreCarte" placeholder="Ex: Corriger bug login">
+      <small class="err" id="erreurTitreCarte"></small>
+
+      <label for="descCarte">Description</label>
+      <textarea id="descCarte" rows="3" placeholder="Details de la tache..."></textarea>
+
+      <div class="modal-row">
+        <select id="prioriteCarte">
+          <option value="basse">basse</option>
+          <option value="moyenne" selected>moyenne</option>
+          <option value="haute">haute</option>
+        </select>
+        <input type="date" id="dateCarte">
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" data-close="modalCarte">Annuler</button>
+        <button type="submit">Enregistrer</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="../js/auth.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/dragdrop.js"></script>
+  <script src="../js/app.js"></script>
+</body>
+</html>

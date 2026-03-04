@@ -1,0 +1,283 @@
+﻿:root {
+  --fond-a: #eef5ff;
+  --fond-b: #e8fff3;
+  --texte: #1f2937;
+  --texte-soft: #5b6678;
+  --primaire: #1d4ed8;
+  --bord: #d6e0f0;
+  --blanc: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Poppins, sans-serif;
+  color: var(--texte);
+  background: linear-gradient(140deg, var(--fond-a), var(--fond-b));
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  background: #ffffffd9;
+  border-bottom: 1px solid var(--bord);
+  backdrop-filter: blur(6px);
+}
+
+.nav-fixe {
+  box-shadow: 0 8px 20px #00000012;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.logo-badge {
+  background: var(--primaire);
+  color: #fff;
+  border-radius: 10px;
+  padding: 6px 9px;
+  line-height: 1;
+}
+
+.menu-btn {
+  display: none;
+  border: 1px solid var(--bord);
+  border-radius: 8px;
+  background: #fff;
+  padding: 6px 10px;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 14px;
+}
+
+.btn-principal {
+  border: 0;
+  border-radius: 10px;
+  background: var(--primaire);
+  color: #fff;
+  padding: 9px 12px;
+  display: inline-block;
+}
+
+.hero {
+  max-width: 1080px;
+  margin: 24px auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: center;
+}
+
+.hero-tag {
+  display: inline-block;
+  font-size: 13px;
+  border-radius: 999px;
+  padding: 6px 10px;
+  margin-bottom: 10px;
+  color: #1e40af;
+  background: #dbeafe;
+}
+
+.hero h1 {
+  font-size: 34px;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  color: var(--texte-soft);
+  margin-bottom: 12px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-lien {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--bord);
+}
+
+.hero-board {
+  background: var(--blanc);
+  border: 1px solid var(--bord);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.hero-board-head {
+  background: #eef2ff;
+  padding: 10px 12px;
+  font-weight: 600;
+}
+
+.hero-board-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px;
+}
+
+.hero-board-cols article {
+  border: 1px solid var(--bord);
+  border-radius: 10px;
+  background: #f8fbff;
+  padding: 8px;
+}
+
+.hero-board-cols h3 {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.hero-board-cols p {
+  font-size: 12px;
+  color: var(--texte-soft);
+  border: 1px solid var(--bord);
+  border-radius: 8px;
+  background: #fff;
+  padding: 6px;
+  margin: 5px 0;
+}
+
+.stats {
+  max-width: 1080px;
+  margin: 0 auto 10px;
+  padding: 0 20px 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.stats article {
+  background: #fff;
+  border: 1px solid var(--bord);
+  border-radius: 14px;
+  text-align: center;
+  padding: 14px;
+}
+
+.stats strong {
+  color: var(--primaire);
+  display: block;
+  font-size: 20px;
+}
+
+.stats span {
+  font-size: 13px;
+  color: var(--texte-soft);
+}
+
+.bloc {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 28px 20px;
+}
+
+.bloc h2 {
+  margin-bottom: 12px;
+}
+
+.grille {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.grille article {
+  background: #fff;
+  border: 1px solid var(--bord);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.grille p {
+  font-size: 14px;
+  color: var(--texte-soft);
+}
+
+.bloc-clair {
+  border: 1px solid var(--bord);
+  border-radius: 16px;
+  background: #ffffffa6;
+  margin-bottom: 14px;
+}
+
+.bloc-clair ol {
+  padding-left: 18px;
+  color: #334155;
+  line-height: 1.9;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  color: #475569;
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .grille,
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .menu {
+    display: none;
+    position: absolute;
+    top: 58px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    background: #fff;
+    border-bottom: 1px solid var(--bord);
+    padding: 12px 18px;
+  }
+
+  .menu.ouvert {
+    display: flex;
+  }
+
+  .grille,
+  .stats,
+  .hero-board-cols {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,136 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription - TaskFlow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+  <main class="auth-page">
+    <section class="auth-info">
+      <a class="logo" href="../index.html"><span>TF</span>TaskFlow</a>
+      <h1>Inscription</h1>
+      <p>Creer ton espace de travail pour suivre tes taches,objectifs et les accomplirs.</p>
+    </section>
+
+    <section class="auth-card">
+      <a class="retour" href="../index.html">Retour a l'accueil</a>
+
+      <div id="msgErreur" class="alerte erreur" style="display:none"></div>
+      <div id="msgSucces" class="alerte succes" style="display:none"></div>
+
+      <form id="formRegister" novalidate>
+        <label for="nom">Nom complet</label>
+        <input id="nom" type="text" placeholder="Ex: Diallo Mamadou">
+        <small id="erreurNom" class="err"></small>
+
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="nom@exemple.com">
+        <small id="erreurEmail" class="err"></small>
+
+        <label for="motdepasse">Mot de passe</label>
+        <div class="ligne">
+          <input id="motdepasse" type="password" placeholder="6 caracteres minimum">
+          <button id="voirMdp" type="button">voir</button>
+        </div>
+        <small id="erreurMdp" class="err"></small>
+
+        <label for="confirmerMdp">Confirmer le mot de passe</label>
+        <input id="confirmerMdp" type="password" placeholder="Repeter le mot de passe">
+        <small id="erreurConfirm" class="err"></small>
+
+        <label class="ligne-check" for="conditions">
+          <input id="conditions" type="checkbox">
+          J'accepte les conditions
+        </label>
+        <small id="erreurConditions" class="err"></small>
+
+        <button class="btn" type="submit">Creer mon compte</button>
+      </form>
+
+      <p class="switch">Deja inscrit ? <a href="login.html">Connexion</a></p>
+    </section>
+  </main>
+
+  <script src="../js/auth.js"></script>
+  <script>
+    var champMdp = document.getElementById('motdepasse');
+    var boutonVoir = document.getElementById('voirMdp');
+
+    boutonVoir.addEventListener('click', function () {
+      var visible = champMdp.type === 'password';
+      champMdp.type = visible ? 'text' : 'password';
+      boutonVoir.textContent = visible ? 'masquer' : 'voir';
+    });
+
+    document.getElementById('formRegister').addEventListener('submit', function (e) {
+      e.preventDefault();
+      nettoyerMessages();
+
+      var nom = lireValeur('nom').trim();
+      var email = lireValeur('email').trim();
+      var motdepasse = lireValeur('motdepasse');
+      var confirmer = lireValeur('confirmerMdp');
+      var conditions = document.getElementById('conditions').checked;
+
+      var valide = true;
+
+      if (nom.length < 2) {
+        afficherErreur('erreurNom', 'Nom trop court');
+        valide = false;
+      }
+
+      if (!email.includes('@')) {
+        afficherErreur('erreurEmail', 'Email invalide');
+        valide = false;
+      }
+
+      if (motdepasse.length < 6) {
+        afficherErreur('erreurMdp', '6 caracteres minimum');
+        valide = false;
+      }
+
+      if (motdepasse !== confirmer) {
+        afficherErreur('erreurConfirm', 'Mots de passe differents');
+        valide = false;
+      }
+
+      if (!conditions) {
+        afficherErreur('erreurConditions', 'Case obligatoire');
+        valide = false;
+      }
+
+      if (!valide) return;
+
+      var users = lireUsers();
+      var existe = users.find(function (u) { return u.email === email; });
+
+      if (existe) {
+        afficherMessage('msgErreur', 'Cet email existe deja');
+        return;
+      }
+
+      var user = {
+        id: creerId(),
+        nom: nom,
+        email: email,
+        motdepasse: motdepasse,
+        date: new Date().toLocaleDateString('fr-FR')
+      };
+
+      users.push(user);
+      sauverUsers(users);
+      definirSession({ id: user.id, nom: user.nom, email: user.email });
+
+      afficherMessage('msgSucces', 'Compte cree, redirection...');
+      setTimeout(function () {
+        window.location.href = 'dashboard.html';
+      }, 700);
+    });
+  </script>
+</body>
+</html>
